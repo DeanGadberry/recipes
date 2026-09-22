@@ -43,13 +43,12 @@ UNIT_ALIASES = [
     ("large", "large"), ("medium", "medium"), ("small", "small"),
 ]
 
-NUM_RE = re.compile(
-    r"""^\s*
-    (?P<whole>\d+)?\s*
-    (?P<frac>(\d+/\d+)|[""" + "".join(VULGAR_FRACTIONS.keys()) + r"""])?
-    """,
-    re.VERBOSE,
-)
+# Tried in order -- most specific first, so "1/2" isn't consumed as a bare
+# "1" before the fraction pattern gets a chance to match it.
+MIXED_NUMBER_RE = re.compile(r"^(\d+)\s+(\d+)/(\d+)\b")
+SIMPLE_FRACTION_RE = re.compile(r"^(\d+)/(\d+)\b")
+DECIMAL_OR_WHOLE_RE = re.compile(r"^(\d+(?:\.\d+)?)\b")
+VULGAR_RE = re.compile("^[" + "".join(VULGAR_FRACTIONS.keys()) + "]")
 
 
 def _parse_number_prefix(text):
@@ -65,26 +64,25 @@ def _parse_number_prefix(text):
         rest = text[range_match.end():].strip()
         return qty, rest
 
-    m = NUM_RE.match(text)
-    if not m or (not m.group("whole") and not m.group("frac")):
-        # Try a lone vulgar fraction at the start, e.g. "½ cup"
-        if text[0] in VULGAR_FRACTIONS:
-            return VULGAR_FRACTIONS[text[0]], text[1:].strip()
-        return None, text
+    m = MIXED_NUMBER_RE.match(text)
+    if m:
+        qty = int(m.group(1)) + float(m.group(2)) / float(m.group(3))
+        return qty, text[m.end():].strip()
 
-    whole = int(m.group("whole")) if m.group("whole") else 0
-    frac_val = 0.0
-    frac = m.group("frac")
-    if frac:
-        if frac in VULGAR_FRACTIONS:
-            frac_val = VULGAR_FRACTIONS[frac]
-        elif "/" in frac:
-            num, den = frac.split("/")
-            frac_val = float(num) / float(den)
+    m = SIMPLE_FRACTION_RE.match(text)
+    if m:
+        qty = float(m.group(1)) / float(m.group(2))
+        return qty, text[m.end():].strip()
 
-    qty = whole + frac_val
-    rest = text[m.end():].strip()
-    return qty, rest
+    m = VULGAR_RE.match(text)
+    if m:
+        return VULGAR_FRACTIONS[m.group(0)], text[m.end():].strip()
+
+    m = DECIMAL_OR_WHOLE_RE.match(text)
+    if m:
+        return float(m.group(1)), text[m.end():].strip()
+
+    return None, text
 
 
 def _parse_unit_prefix(text):

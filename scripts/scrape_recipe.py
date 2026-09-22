@@ -4,7 +4,10 @@
 Uses the `recipe-scrapers` library (https://github.com/hhursev/recipe-scrapers),
 which reads a page's structured Recipe data (schema.org/JSON-LD), so blog
 narrative/story text is never pulled in -- only name, ingredients, instructions,
-timing, yield and image.
+timing, yield and image. Sites the library has a purpose-built scraper for
+use that; anything else falls back to generic schema.org Recipe parsing
+(`supported_only=False`), which covers most WordPress recipe plugins even
+without a dedicated scraper.
 
 Usage:
     python scripts/scrape_recipe.py <url> [--category CATEGORY] [--tags a,b,c]
@@ -18,7 +21,9 @@ import re
 import sys
 from pathlib import Path
 
-from recipe_scrapers import scrape_me
+from urllib.request import urlopen, Request
+
+from recipe_scrapers import HEADERS, NoSchemaFoundInWildMode, scrape_html
 
 sys.path.insert(0, str(Path(__file__).parent))
 from ingredient_parser import parse_ingredient
@@ -47,7 +52,18 @@ def clean_instructions(raw_instructions):
 
 
 def scrape(url, category=None, tags=None):
-    scraper = scrape_me(url)
+    html = urlopen(Request(url, headers=HEADERS)).read().decode("utf-8")
+    # supported_only=False: use recipe-scrapers' purpose-built parser for
+    # sites it knows, but fall back to generic schema.org/JSON-LD Recipe
+    # parsing for everything else -- most recipe plugins/themes emit that
+    # markup even when the site has no dedicated scraper class.
+    try:
+        scraper = scrape_html(html, org_url=url, supported_only=False)
+    except NoSchemaFoundInWildMode:
+        raise RuntimeError(
+            f"No recipe data (schema.org markup) found on {url}. "
+            "This page likely needs to be added by hand."
+        )
 
     name = scraper.title()
     slug = slugify(name)
