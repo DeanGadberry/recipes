@@ -64,7 +64,7 @@
     for (const cat of categories) {
       const chip = document.createElement('button');
       chip.className = 'chip' + (cat === state.category ? ' active' : '');
-      chip.textContent = cat;
+      chip.innerHTML = icon(cat === 'All' ? 'icon-grid' : categoryIcon(cat)) + `<span>${cat}</span>`;
       chip.addEventListener('click', () => {
         state.category = cat;
         categoryBar.querySelectorAll('.chip').forEach((c) => c.classList.remove('active'));
@@ -144,7 +144,7 @@
       thumb.style.backgroundImage = `url("${recipe.image}")`;
     } else {
       thumb.classList.add('no-image');
-      thumb.textContent = recipe.name.slice(0, 1).toUpperCase();
+      thumb.innerHTML = icon(categoryIcon(recipe.category));
     }
     a.appendChild(thumb);
 
@@ -158,10 +158,10 @@
     const meta = document.createElement('div');
     meta.className = 'card-meta';
     const bits = [];
-    if (recipe.category) bits.push(recipe.category);
-    if (recipe.total_time_minutes) bits.push(`${recipe.total_time_minutes} min`);
-    if (recipe.servings_label) bits.push(recipe.servings_label);
-    meta.textContent = bits.join(' · ');
+    if (recipe.category) bits.push(`<span>${icon(categoryIcon(recipe.category))}${recipe.category}</span>`);
+    if (recipe.total_time_minutes) bits.push(`<span>${icon('icon-clock')}${recipe.total_time_minutes} min</span>`);
+    if (recipe.servings_label) bits.push(`<span>${icon('icon-servings')}${recipe.servings_label}</span>`);
+    meta.innerHTML = bits.join('');
     body.appendChild(meta);
 
     a.appendChild(body);

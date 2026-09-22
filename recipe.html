@@ -3,21 +3,34 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Recipe</title>
+<title>Recipe &mdash; Gadberry Recipes</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700&family=Jost:wght@400;500;600&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="assets/css/style.css">
 </head>
 <body>
 <header class="site-header no-print">
   <div class="container header-row">
-    <a class="brand" href="index.html">Recipes</a>
+    <a class="brand" href="index.html">
+      <svg class="deco" aria-hidden="true"><use href="#icon-leaf"></use></svg>
+      <span>
+        <span class="brand-text">Gadberry Recipes</span>
+        <span class="tagline">Gathered at our table</span>
+      </span>
+    </a>
     <nav>
-      <a href="index.html">&larr; All recipes</a>
+      <a href="index.html">
+        <svg class="icon" aria-hidden="true"><use href="#icon-grid"></use></svg>
+        All recipes
+      </a>
     </nav>
   </div>
 </header>
 
 <main class="container">
   <div id="not-found" class="empty-state" hidden>
+    <svg class="deco" aria-hidden="true"><use href="#deco-sprig"></use></svg>
     <h2>Recipe not found</h2>
     <p><a href="index.html">Back to all recipes</a></p>
   </div>
@@ -26,12 +39,17 @@
     <div id="recipe-image" class="recipe-image" hidden></div>
 
     <h1 id="recipe-title"></h1>
-    <p id="recipe-meta" class="card-meta"></p>
+    <div class="recipe-meta-row">
+      <p id="recipe-meta" class="card-meta recipe-meta"></p>
+    </div>
     <p id="view-count" class="view-count no-print"></p>
 
     <div class="recipe-layout">
       <section class="ingredients-panel">
-        <h2>Ingredients</h2>
+        <div class="panel-heading">
+          <svg class="icon" aria-hidden="true"><use href="#icon-fork-knife"></use></svg>
+          <h2>Ingredients</h2>
+        </div>
 
         <div class="scale-controls no-print">
           <label for="servings-input">Servings</label>
@@ -44,17 +62,31 @@
       </section>
 
       <section class="instructions-panel">
-        <h2>Instructions</h2>
+        <div class="panel-heading">
+          <svg class="icon" aria-hidden="true"><use href="#icon-list"></use></svg>
+          <h2>Instructions</h2>
+        </div>
         <ol id="instruction-list" class="instruction-list"></ol>
       </section>
     </div>
 
     <p id="recipe-source" class="recipe-source"></p>
 
-    <button id="print-btn" type="button" class="no-print print-btn">Print recipe</button>
+    <button id="print-btn" type="button" class="no-print print-btn">
+      <svg class="icon" aria-hidden="true"><use href="#icon-print"></use></svg>
+      Print recipe
+    </button>
   </article>
 </main>
 
+<footer class="site-footer no-print">
+  <div class="container">
+    <svg class="deco" aria-hidden="true"><use href="#deco-sprig"></use></svg>
+    <p>Gadberry Recipes &mdash; every recipe keeps only its ingredients, steps, and its source.</p>
+  </div>
+</footer>
+
+<script src="assets/js/icons.js"></script>
 <script src="assets/js/data.js"></script>
 <script src="assets/js/scale.js"></script>
 <script src="assets/js/views.js"></script>

@@ -1,4 +1,4 @@
-# Recipes
+# Gadberry Recipes
 
 A searchable, static family recipe box. Plain HTML/CSS/JS, hosted on GitHub Pages
 at deangadberry.com/recipes. No server, no build step, no database.
@@ -78,12 +78,35 @@ file -- `recordView(slug)` and `getCounts(slugs)` are the only two calls the
 rest of the site makes. Set `CONFIG.backend = 'local'` there to fall back to
 a purely per-browser count with no network calls at all.
 
-## Customizing
+## Design system
 
-- **Colors/fonts/layout**: CSS custom properties at the top of
-  `assets/css/style.css` (`:root`), with a dark-mode variant already wired up.
-- **Categories**: not a fixed list -- whatever `category` values exist across
-  `data/recipes/*.json` show up automatically as filter chips.
+Modern-farmhouse: warm cream/ivory surfaces, sage green and terracotta
+accents, a serif display face over a clean sans body, and hand-drawn
+botanical line art for texture. No background is ever black, including
+dark mode (a deep warm olive, not near-black) -- see `:root` and
+`:root[data-theme="dark"]` / `prefers-color-scheme: dark` at the top of
+`assets/css/style.css` for every color as a named custom property.
+
+- **Fonts**: [Playfair Display](https://fonts.google.com/specimen/Playfair+Display)
+  for headings (`--font-display`), [Jost](https://fonts.google.com/specimen/Jost)
+  for body text (`--font-body`), both loaded from Google Fonts in each page's
+  `<head>`.
+- **Icons and illustrations**: one shared sprite, `assets/img/icons.svg` --
+  functional line icons (clock, servings, search, print, ...), a small set of
+  per-category icons, and two illustrated greenery accents (`deco-sprig`,
+  `deco-divider`). `assets/js/icons.js` fetches and injects that sprite once
+  per page load, so every page references icons with a two-line
+  `<svg class="icon"><use href="#icon-name"></use></svg>` instead of
+  duplicating markup -- add a new `<symbol>` to that one file and it's
+  available everywhere immediately.
+- **Category icons are automatic, not manual.** `CATEGORY_ICONS` in
+  `icons.js` maps common category names (breakfast, dinner, dessert,
+  slow cooker, ...) to an icon; anything not in that map quietly falls back
+  to a plain leaf rather than needing per-recipe icon assignment. Extend the
+  map as new categories show up.
+- **Categories** themselves aren't a fixed list either -- whatever `category`
+  values exist across `data/recipes/*.json` show up automatically as filter
+  chips.
 - **Search**: [Fuse.js](https://www.fusejs.io/) (loaded from a CDN, no build
   step) does fuzzy matching across name/tags/category/source in `app.js`.
 - **Grid vs. list view**: toggle in the top-right of the browse page, remembered

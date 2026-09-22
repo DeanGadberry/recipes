@@ -3,47 +3,72 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Request a Recipe &mdash; Recipes</title>
+<title>Request a Recipe &mdash; Gadberry Recipes</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700&family=Jost:wght@400;500;600&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="assets/css/style.css">
 </head>
 <body>
 <header class="site-header">
   <div class="container header-row">
-    <a class="brand" href="index.html">Recipes</a>
+    <a class="brand" href="index.html">
+      <svg class="deco" aria-hidden="true"><use href="#icon-leaf"></use></svg>
+      <span>
+        <span class="brand-text">Gadberry Recipes</span>
+        <span class="tagline">Gathered at our table</span>
+      </span>
+    </a>
     <nav>
-      <a href="index.html">&larr; All recipes</a>
+      <a href="index.html">
+        <svg class="icon" aria-hidden="true"><use href="#icon-grid"></use></svg>
+        All recipes
+      </a>
     </nav>
   </div>
 </header>
 
-<main class="container narrow">
+<main class="container narrow request-page">
   <h1>Request a recipe</h1>
-  <p>Found something worth adding? Send the link and it'll show up here on its own &mdash; nobody has to touch code.</p>
+  <p class="lede">Found something worth adding to the family box? Send the link and it'll show up here on its own &mdash; nobody has to touch code.</p>
 
-  <a class="button" id="github-request-link" href="#" target="_blank" rel="noopener">Open a recipe request</a>
+  <a class="button" id="github-request-link" href="#" target="_blank" rel="noopener">
+    <svg class="icon" aria-hidden="true"><use href="#icon-plus"></use></svg>
+    Open a recipe request
+  </a>
   <p class="hint">Opens a short form &mdash; paste the URL and submit. It's picked up automatically within a minute or two.</p>
 
   <h2>From the GitHub mobile app</h2>
-  <ol>
+  <ol class="step-list">
     <li>Open the GitHub app and go to the <strong>DeanGadberry/recipes</strong> repo.</li>
     <li>Tap <strong>Issues</strong>, then the <strong>+</strong> to start a new one.</li>
-    <li>It opens straight into the "Recipe request" form (it's the only option) &mdash; paste the URL in the first field.</li>
+    <li>It opens straight into the "Recipe request" form &mdash; paste the URL in the first field.</li>
     <li>Tap <strong>Submit</strong>. That's it &mdash; no need to check back unless something goes wrong, in which case it'll leave a comment on your issue explaining why.</li>
   </ol>
 
-  <h2>Other ways to add one</h2>
-  <ul>
-    <li>Paste the recipe URL directly into a chat with Claude for this project and ask for it to be added.</li>
-    <li>Email a link to <a id="mailto-link" href="#"></a>.</li>
-  </ul>
+  <div class="other-ways">
+    <h2>Other ways to add one</h2>
+    <ul>
+      <li>
+        <svg class="icon" aria-hidden="true"><use href="#icon-leaf"></use></svg>
+        <span>Paste the recipe URL directly into a chat with Claude for this project and ask for it to be added.</span>
+      </li>
+      <li>
+        <svg class="icon" aria-hidden="true"><use href="#icon-mail"></use></svg>
+        <span>Email a link to <a id="mailto-link" href="#"></a>.</span>
+      </li>
+    </ul>
+  </div>
 </main>
 
 <footer class="site-footer">
   <div class="container">
-    <p>A family recipe box &mdash; every recipe keeps only its ingredients, steps, and its source.</p>
+    <svg class="deco" aria-hidden="true"><use href="#deco-sprig"></use></svg>
+    <p>Gadberry Recipes &mdash; every recipe keeps only its ingredients, steps, and its source.</p>
   </div>
 </footer>
 
+<script src="assets/js/icons.js"></script>
 <script>
   const REPO = 'DeanGadberry/recipes';
   const REQUEST_EMAIL = 'claude@deangadberry.com';

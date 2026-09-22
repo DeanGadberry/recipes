@@ -32,13 +32,17 @@
     return;
   }
 
-  document.title = `${recipe.name} — Recipes`;
+  document.title = `${recipe.name} — Gadberry Recipes`;
   el.title.textContent = recipe.name;
 
   const metaBits = [];
-  if (recipe.category) metaBits.push(recipe.category);
-  if (recipe.total_time_minutes) metaBits.push(`${recipe.total_time_minutes} min`);
-  el.meta.textContent = metaBits.join(' · ');
+  if (recipe.category) {
+    metaBits.push(`<span class="category-badge">${icon(categoryIcon(recipe.category))}${recipe.category}</span>`);
+  }
+  if (recipe.total_time_minutes) {
+    metaBits.push(`<span>${icon('icon-clock')}${recipe.total_time_minutes} min</span>`);
+  }
+  el.meta.innerHTML = metaBits.join('');
 
   if (recipe.tags && recipe.tags.length) {
     const tagWrap = document.createElement('div');
@@ -115,7 +119,7 @@
   });
 
   if (recipe.source_url || recipe.source_name) {
-    el.source.innerHTML = '';
+    el.source.innerHTML = icon('icon-external');
     if (recipe.source_url) {
       const link = document.createElement('a');
       link.href = recipe.source_url;
@@ -132,7 +136,7 @@
 
   ViewTracker.recordView(slug).then((count) => {
     if (count && el.viewCount) {
-      el.viewCount.textContent = `${count} view${count === 1 ? '' : 's'}`;
+      el.viewCount.innerHTML = `${icon('icon-eye')}${count} view${count === 1 ? '' : 's'}`;
     }
   });
 

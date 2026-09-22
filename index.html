@@ -3,23 +3,40 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Recipes</title>
-<meta name="description" content="A searchable family recipe box.">
+<title>Gadberry Recipes</title>
+<meta name="description" content="Gadberry Recipes — a searchable family recipe box, gathered from our table to yours.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700&family=Jost:wght@400;500;600&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="assets/css/style.css">
 </head>
 <body>
 <header class="site-header">
   <div class="container header-row">
-    <a class="brand" href="index.html">Recipes</a>
+    <a class="brand" href="index.html">
+      <svg class="deco" aria-hidden="true"><use href="#icon-leaf"></use></svg>
+      <span>
+        <span class="brand-text">Gadberry Recipes</span>
+        <span class="tagline">Gathered at our table</span>
+      </span>
+    </a>
     <nav>
-      <a href="request.html">Request a recipe</a>
+      <a href="request.html">
+        <svg class="icon" aria-hidden="true"><use href="#icon-plus"></use></svg>
+        Request a recipe
+      </a>
     </nav>
   </div>
 </header>
 
+<svg class="divider" aria-hidden="true"><use href="#deco-divider"></use></svg>
+
 <main class="container">
   <div class="toolbar">
-    <input id="search-input" type="search" placeholder="Search recipes, ingredients, tags..." aria-label="Search recipes">
+    <div class="search-field">
+      <svg class="icon" aria-hidden="true"><use href="#icon-search"></use></svg>
+      <input id="search-input" type="search" placeholder="Search recipes, ingredients, tags..." aria-label="Search recipes">
+    </div>
     <div class="toolbar-controls">
       <select id="sort-select" aria-label="Sort recipes">
         <option value="newest">Newest</option>
@@ -29,8 +46,8 @@
         <option value="least-popular">Least cooked</option>
       </select>
       <div id="view-toggle" class="view-toggle" role="group" aria-label="Layout">
-        <button type="button" data-view="grid" class="active" aria-label="Grid view">&#9638;</button>
-        <button type="button" data-view="list" aria-label="List view">&#9776;</button>
+        <button type="button" data-view="grid" class="active" aria-label="Grid view"><svg class="icon" aria-hidden="true"><use href="#icon-grid"></use></svg></button>
+        <button type="button" data-view="list" aria-label="List view"><svg class="icon" aria-hidden="true"><use href="#icon-rows"></use></svg></button>
       </div>
     </div>
   </div>
@@ -42,18 +59,21 @@
   <div id="recipe-grid" class="recipe-grid"></div>
 
   <div id="empty-state" class="empty-state" hidden>
-    <h2>No recipes yet</h2>
+    <svg class="deco" aria-hidden="true"><use href="#deco-sprig"></use></svg>
+    <h2>Nothing here yet</h2>
     <p>Nothing matches your search, or the box is still empty. <a href="request.html">Request a recipe</a> to get started.</p>
   </div>
 </main>
 
 <footer class="site-footer">
   <div class="container">
-    <p>A family recipe box &mdash; every recipe keeps only its ingredients, steps, and its source.</p>
+    <svg class="deco" aria-hidden="true"><use href="#deco-sprig"></use></svg>
+    <p>Gadberry Recipes &mdash; every recipe keeps only its ingredients, steps, and its source.</p>
   </div>
 </footer>
 
 <script src="https://cdn.jsdelivr.net/npm/fuse.js@7.0.0/dist/fuse.min.js"></script>
+<script src="assets/js/icons.js"></script>
 <script src="assets/js/data.js"></script>
 <script src="assets/js/views.js"></script>
 <script src="assets/js/app.js"></script>
