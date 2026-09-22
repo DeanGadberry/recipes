@@ -24,14 +24,18 @@ the blog-post story gets stripped out before it ever reaches the site.
 
 **Three ways in, same result:**
 
-1. **Ask Claude.** Paste a recipe URL into a chat on this project and ask for
+1. **GitHub app (or github.com).** Open the repo, go to Issues, tap New --
+   it opens straight into the "Recipe request" form (it's the only template;
+   blank issues are disabled). Paste the URL, submit. A GitHub Actions
+   workflow (`.github/workflows/add-recipe.yml`) picks it up within a
+   minute or two: scrapes the page, commits the new recipe, comments on the
+   issue, and closes it. If the site isn't supported it comments explaining
+   why instead of failing silently. `request.html` on the site links straight
+   there. The URL just needs to appear somewhere in the issue -- the workflow
+   falls back to grabbing the first link in the title/body if the form
+   field itself doesn't come through cleanly (some clients mangle it).
+2. **Ask Claude.** Paste a recipe URL into a chat on this project and ask for
    it to be added -- it'll scrape it, clean it up, and commit it.
-2. **Request form.** Anyone visits `request.html` and opens a "Recipe
-   request" GitHub issue with the URL. A GitHub Actions workflow
-   (`.github/workflows/add-recipe.yml`) picks it up automatically: it scrapes
-   the page, commits the new recipe, comments on the issue, and closes it. If
-   the site isn't supported it leaves a comment saying so instead of failing
-   silently.
 3. **Run the scraper yourself:**
    ```
    pip install -r scripts/requirements.txt
