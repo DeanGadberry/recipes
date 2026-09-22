@@ -2,7 +2,19 @@ name: Add recipe from request
 
 on:
   issues:
-    types: [opened, labeled]
+    types: [opened]
+  # For manually retrying a specific issue (e.g. it failed and the cause has
+  # since been fixed) without needing a second real GitHub event. GitHub's
+  # own issue-form submission fires *both* "opened" and "labeled" almost
+  # simultaneously when the form sets a default label, which used to make
+  # every legitimate request double-trigger this workflow and race itself --
+  # triggering on "opened" alone removes that source of duplicate runs.
+  workflow_dispatch:
+    inputs:
+      issue_number:
+        description: Issue number to (re)process
+        required: true
+        type: number
 
 # Requests can arrive in a burst (several issues opened close together).
 # Each run commits straight to main, so without this, simultaneous runs
@@ -33,7 +45,22 @@ jobs:
         uses: actions/github-script@v7
         with:
           script: |
-            const body = context.payload.issue.body || '';
+            let issueNumber, title, body;
+            if (context.eventName === 'workflow_dispatch') {
+              issueNumber = Number(context.payload.inputs.issue_number);
+              const { data: issue } = await github.rest.issues.get({
+                owner: context.repo.owner,
+                repo: context.repo.repo,
+                issue_number: issueNumber,
+              });
+              title = issue.title;
+              body = issue.body || '';
+            } else {
+              issueNumber = context.payload.issue.number;
+              title = context.payload.issue.title;
+              body = context.payload.issue.body || '';
+            }
+
             function field(label) {
               const re = new RegExp('### ' + label + '\\s*\\r?\\n\\r?\\n([^\\r\\n]*)', 'i');
               const m = body.match(re);
@@ -46,9 +73,10 @@ jobs:
             // body so a plain pasted link still works.
             let url = field('Recipe URL');
             if (!url) {
-              const urlMatch = (context.payload.issue.title + '\n' + body).match(/https?:\/\/\S+/);
+              const urlMatch = (title + '\n' + body).match(/https?:\/\/\S+/);
               url = urlMatch ? urlMatch[0].replace(/[)\].,;!?'"]+$/, '') : '';
             }
+            core.setOutput('issue_number', issueNumber);
             core.setOutput('url', url);
             core.setOutput('category', field('Category \\(optional\\)'));
             core.setOutput('tags', field('Tags \\(optional, comma-separated\\)'));
@@ -61,7 +89,7 @@ jobs:
             await github.rest.issues.createComment({
               owner: context.repo.owner,
               repo: context.repo.repo,
-              issue_number: context.issue.number,
+              issue_number: ${{ steps.parse.outputs.issue_number }},
               body: "Couldn't find a link in this issue -- please include the recipe's URL and it'll be picked up automatically.",
             });
 
@@ -89,6 +117,7 @@ jobs:
           python scripts/scrape_recipe.py "${ARGS[@]}"
 
       - name: Commit and push
+        id: commit
         if: steps.scrape.outcome == 'success'
         run: |
           git config user.name "recipe-bot"
@@ -101,7 +130,11 @@ jobs:
           for i in 1 2 3 4 5; do
             python scripts/build_index.py
             git add data/
-            git commit -m "Add recipe from #${{ github.event.issue.number }}"
+            if git diff --cached --quiet; then
+              echo "Nothing new to commit -- this recipe is already on main (duplicate trigger)."
+              break
+            fi
+            git commit -m "Add recipe from #${{ steps.parse.outputs.issue_number }}"
             if git push origin HEAD:main; then
               break
             fi
@@ -117,37 +150,37 @@ jobs:
           done
 
       - name: Comment and close on success
-        if: steps.scrape.outcome == 'success'
+        if: steps.scrape.outcome == 'success' && steps.commit.outcome == 'success'
         uses: actions/github-script@v7
         with:
           script: |
             await github.rest.issues.createComment({
               owner: context.repo.owner,
               repo: context.repo.repo,
-              issue_number: context.issue.number,
+              issue_number: ${{ steps.parse.outputs.issue_number }},
               body: "Added! It'll show up on the site shortly.",
             });
             await github.rest.issues.update({
               owner: context.repo.owner,
               repo: context.repo.repo,
-              issue_number: context.issue.number,
+              issue_number: ${{ steps.parse.outputs.issue_number }},
               state: 'closed',
             });
 
       - name: Comment on failure
-        if: steps.parse.outputs.url != '' && steps.scrape.outcome != 'success'
+        if: steps.parse.outputs.url != '' && (steps.scrape.outcome != 'success' || steps.commit.outcome != 'success')
         uses: actions/github-script@v7
         with:
           script: |
             await github.rest.issues.createComment({
               owner: context.repo.owner,
               repo: context.repo.repo,
-              issue_number: context.issue.number,
+              issue_number: ${{ steps.parse.outputs.issue_number }},
               body: "Couldn't automatically read that recipe (the site may not be supported yet). It'll need to be added by hand -- sorry! Trying a different source URL for the same recipe sometimes works.",
             });
             await github.rest.issues.addLabels({
               owner: context.repo.owner,
               repo: context.repo.repo,
-              issue_number: context.issue.number,
+              issue_number: ${{ steps.parse.outputs.issue_number }},
               labels: ['needs-manual-entry'],
             });

@@ -55,9 +55,8 @@ else falls back to generic schema.org Recipe parsing, which covers most
 WordPress recipe plugins even without a dedicated scraper -- so most sites
 work either way. If a site truly has no structured recipe data at all,
 scraping fails cleanly (an error, not garbage data) -- add that recipe by
-hand as a JSON file instead, following the schema in
-`data/recipes/basic-pancakes.json` (the placeholder example -- delete it
-once you have real recipes).
+hand as a JSON file instead, following the schema of any file already in
+`data/recipes/`.
 
 ## Ingredient scaling
 
