@@ -8,6 +8,7 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700&family=Jost:wght@400;500;600&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="assets/css/style.css">
+<script src="assets/js/prefs.js"></script>
 </head>
 <body>
 <header class="site-header">
@@ -20,6 +21,9 @@
       </span>
     </a>
     <nav>
+      <button type="button" id="theme-toggle" class="icon-btn" aria-label="Toggle dark mode">
+        <svg class="icon" aria-hidden="true"><use href="#icon-moon"></use></svg>
+      </button>
       <a href="index.html">
         <svg class="icon" aria-hidden="true"><use href="#icon-grid"></use></svg>
         All recipes
@@ -69,6 +73,7 @@
 </footer>
 
 <script src="assets/js/icons.js"></script>
+<script src="assets/js/theme-toggle.js"></script>
 <script>
   const REPO = 'DeanGadberry/recipes';
   const REQUEST_EMAIL = 'claude@deangadberry.com';

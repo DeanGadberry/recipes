@@ -122,6 +122,16 @@ def scrape(url, category=None, tags=None):
         total_time = None
 
     try:
+        prep_time = scraper.prep_time()
+    except Exception:
+        prep_time = None
+
+    try:
+        cook_time = scraper.cook_time()
+    except Exception:
+        cook_time = None
+
+    try:
         image = scraper.image()
     except Exception:
         image = None
@@ -147,6 +157,8 @@ def scrape(url, category=None, tags=None):
         "servings": servings_number,
         "servings_label": servings_raw,
         "total_time_minutes": total_time or None,
+        "prep_time_minutes": prep_time or None,
+        "cook_time_minutes": cook_time or None,
         "image": image,
         "ingredients": ingredients,
         "instructions": instructions,

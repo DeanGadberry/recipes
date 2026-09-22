@@ -78,6 +78,28 @@ file -- `recordView(slug)` and `getCounts(slugs)` are the only two calls the
 rest of the site makes. Set `CONFIG.backend = 'local'` there to fall back to
 a purely per-browser count with no network calls at all.
 
+## Quality-of-life features
+
+All per-browser (`localStorage`), no backend, no account -- everything lives
+in `assets/js/prefs.js`:
+
+- **Favorites**: heart a recipe from its card or its own page; filter the
+  browse page to just favorites with the heart toggle next to Sort.
+- **Tap-to-check**: click/tap an ingredient or instruction step to cross it
+  off while cooking. Persists per recipe, so leaving and coming back keeps
+  your progress.
+- **Keep screen on**: a "Keep screen on" button on the recipe page (Screen
+  Wake Lock API) so your phone doesn't sleep mid-recipe. Only shown when the
+  browser supports it.
+- **Copy ingredients / copy link**: copies the *currently scaled* ingredient
+  list as plain text (handy for a grocery-list app), or the recipe's URL, to
+  the clipboard.
+- **Related recipes**: "More from the box" at the bottom of a recipe page --
+  other recipes sharing its category, computed client-side from
+  `data/index.json`.
+- **Light/dark toggle**: the moon/sun button in the header overrides the
+  system `prefers-color-scheme` default; also file-backed in `prefs.js`.
+
 ## Design system
 
 Modern-farmhouse: warm cream/ivory surfaces, sage green and terracotta

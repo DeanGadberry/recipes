@@ -9,6 +9,7 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700&family=Jost:wght@400;500;600&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="assets/css/style.css">
+<script src="assets/js/prefs.js"></script>
 </head>
 <body>
 <header class="site-header">
@@ -21,6 +22,9 @@
       </span>
     </a>
     <nav>
+      <button type="button" id="theme-toggle" class="icon-btn" aria-label="Toggle dark mode">
+        <svg class="icon" aria-hidden="true"><use href="#icon-moon"></use></svg>
+      </button>
       <a href="request.html">
         <svg class="icon" aria-hidden="true"><use href="#icon-plus"></use></svg>
         Request a recipe
@@ -38,6 +42,9 @@
       <input id="search-input" type="search" placeholder="Search recipes, ingredients, tags..." aria-label="Search recipes">
     </div>
     <div class="toolbar-controls">
+      <button type="button" id="favorites-toggle" class="icon-btn" aria-label="Show favorites only" aria-pressed="false">
+        <svg class="icon" aria-hidden="true"><use href="#icon-heart-outline"></use></svg>
+      </button>
       <select id="sort-select" aria-label="Sort recipes">
         <option value="newest">Newest</option>
         <option value="name">Name A-Z</option>
@@ -60,8 +67,8 @@
 
   <div id="empty-state" class="empty-state" hidden>
     <svg class="deco" aria-hidden="true"><use href="#deco-sprig"></use></svg>
-    <h2>Nothing here yet</h2>
-    <p>Nothing matches your search, or the box is still empty. <a href="request.html">Request a recipe</a> to get started.</p>
+    <h2 id="empty-state-heading">Nothing here yet</h2>
+    <p id="empty-state-text">Nothing matches your search, or the box is still empty. <a href="request.html">Request a recipe</a> to get started.</p>
   </div>
 </main>
 
@@ -74,8 +81,10 @@
 
 <script src="https://cdn.jsdelivr.net/npm/fuse.js@7.0.0/dist/fuse.min.js"></script>
 <script src="assets/js/icons.js"></script>
+<script src="assets/js/theme-toggle.js"></script>
 <script src="assets/js/data.js"></script>
 <script src="assets/js/views.js"></script>
+<script src="assets/js/card.js"></script>
 <script src="assets/js/app.js"></script>
 </body>
 </html>

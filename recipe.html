@@ -8,6 +8,7 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700&family=Jost:wght@400;500;600&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="assets/css/style.css">
+<script src="assets/js/prefs.js"></script>
 </head>
 <body>
 <header class="site-header no-print">
@@ -20,6 +21,9 @@
       </span>
     </a>
     <nav>
+      <button type="button" id="theme-toggle" class="icon-btn" aria-label="Toggle dark mode">
+        <svg class="icon" aria-hidden="true"><use href="#icon-moon"></use></svg>
+      </button>
       <a href="index.html">
         <svg class="icon" aria-hidden="true"><use href="#icon-grid"></use></svg>
         All recipes
@@ -38,17 +42,36 @@
   <article id="recipe-main" class="recipe">
     <div id="recipe-image" class="recipe-image" hidden></div>
 
-    <h1 id="recipe-title"></h1>
+    <div class="recipe-title-row">
+      <h1 id="recipe-title"></h1>
+      <button type="button" id="favorite-btn" class="icon-btn no-print" aria-label="Toggle favorite" aria-pressed="false">
+        <svg class="icon" aria-hidden="true"><use href="#icon-heart-outline"></use></svg>
+      </button>
+    </div>
     <div class="recipe-meta-row">
       <p id="recipe-meta" class="card-meta recipe-meta"></p>
     </div>
     <p id="view-count" class="view-count no-print"></p>
+
+    <div class="action-row no-print">
+      <button type="button" id="wake-lock-btn" class="action-chip" hidden>
+        <svg class="icon" aria-hidden="true"><use href="#icon-coffee"></use></svg>
+        Keep screen on
+      </button>
+      <button type="button" id="copy-link-btn" class="action-chip">
+        <svg class="icon" aria-hidden="true"><use href="#icon-link"></use></svg>
+        Copy link
+      </button>
+    </div>
 
     <div class="recipe-layout">
       <section class="ingredients-panel">
         <div class="panel-heading">
           <svg class="icon" aria-hidden="true"><use href="#icon-fork-knife"></use></svg>
           <h2>Ingredients</h2>
+          <button type="button" id="copy-ingredients-btn" class="icon-btn no-print" aria-label="Copy ingredients" title="Copy ingredients">
+            <svg class="icon" aria-hidden="true"><use href="#icon-clipboard"></use></svg>
+          </button>
         </div>
 
         <div class="scale-controls no-print">
@@ -77,6 +100,12 @@
       Print recipe
     </button>
   </article>
+
+  <section id="related-recipes" class="related-recipes no-print" hidden>
+    <svg class="divider" aria-hidden="true"><use href="#deco-divider"></use></svg>
+    <h2>More from the box</h2>
+    <div id="related-grid" class="recipe-grid"></div>
+  </section>
 </main>
 
 <footer class="site-footer no-print">
@@ -87,9 +116,11 @@
 </footer>
 
 <script src="assets/js/icons.js"></script>
+<script src="assets/js/theme-toggle.js"></script>
 <script src="assets/js/data.js"></script>
 <script src="assets/js/scale.js"></script>
 <script src="assets/js/views.js"></script>
+<script src="assets/js/card.js"></script>
 <script src="assets/js/recipe.js"></script>
 </body>
 </html>

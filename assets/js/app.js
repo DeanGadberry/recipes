@@ -9,6 +9,7 @@
     sort: 'newest',
     view: localStorage.getItem('recipe-view-mode') || 'grid',
     counts: new Map(),
+    favoritesOnly: false,
   };
 
   const grid = document.getElementById('recipe-grid');
@@ -18,6 +19,9 @@
   const sortSelect = document.getElementById('sort-select');
   const viewToggle = document.getElementById('view-toggle');
   const resultCount = document.getElementById('result-count');
+  const favoritesToggle = document.getElementById('favorites-toggle');
+  const emptyHeading = document.getElementById('empty-state-heading');
+  const emptyText = document.getElementById('empty-state-text');
 
   let fuse = null;
 
@@ -47,6 +51,14 @@
     state.view = btn.dataset.view;
     localStorage.setItem('recipe-view-mode', state.view);
     applyViewMode();
+  });
+
+  favoritesToggle.addEventListener('click', () => {
+    state.favoritesOnly = !state.favoritesOnly;
+    favoritesToggle.classList.toggle('active', state.favoritesOnly);
+    favoritesToggle.setAttribute('aria-pressed', String(state.favoritesOnly));
+    favoritesToggle.querySelector('use').setAttribute('href', state.favoritesOnly ? '#icon-heart' : '#icon-heart-outline');
+    render();
   });
 
   function applyViewMode() {
@@ -94,6 +106,11 @@
       list = list.filter((r) => r.category === state.category);
     }
 
+    if (state.favoritesOnly) {
+      const favs = Prefs.getFavorites();
+      list = list.filter((r) => favs.has(r.slug));
+    }
+
     if (state.query) {
       const results = getFuse().search(state.query).map((r) => r.item);
       const inCategory = new Set(list.map((r) => r.slug));
@@ -110,6 +127,13 @@
     resultCount.textContent = `${list.length} recipe${list.length === 1 ? '' : 's'}`;
     grid.innerHTML = '';
     emptyState.hidden = list.length !== 0;
+    if (list.length === 0 && state.favoritesOnly) {
+      emptyHeading.textContent = 'No favorites yet';
+      emptyText.innerHTML = 'Tap the heart on a recipe to save it here.';
+    } else {
+      emptyHeading.textContent = 'Nothing here yet';
+      emptyText.innerHTML = 'Nothing matches your search, or the box is still empty. <a href="request.html">Request a recipe</a> to get started.';
+    }
 
     for (const recipe of list) {
       grid.appendChild(renderCard(recipe));
@@ -134,37 +158,8 @@
   }
 
   function renderCard(recipe) {
-    const a = document.createElement('a');
-    a.href = `recipe.html?slug=${encodeURIComponent(recipe.slug)}`;
-    a.className = 'card';
-
-    const thumb = document.createElement('div');
-    thumb.className = 'card-thumb';
-    if (recipe.image) {
-      thumb.style.backgroundImage = `url("${recipe.image}")`;
-    } else {
-      thumb.classList.add('no-image');
-      thumb.innerHTML = icon(categoryIcon(recipe.category));
-    }
-    a.appendChild(thumb);
-
-    const body = document.createElement('div');
-    body.className = 'card-body';
-
-    const title = document.createElement('h3');
-    title.textContent = recipe.name;
-    body.appendChild(title);
-
-    const meta = document.createElement('div');
-    meta.className = 'card-meta';
-    const bits = [];
-    if (recipe.category) bits.push(`<span>${icon(categoryIcon(recipe.category))}${recipe.category}</span>`);
-    if (recipe.total_time_minutes) bits.push(`<span>${icon('icon-clock')}${recipe.total_time_minutes} min</span>`);
-    if (recipe.servings_label) bits.push(`<span>${icon('icon-servings')}${recipe.servings_label}</span>`);
-    meta.innerHTML = bits.join('');
-    body.appendChild(meta);
-
-    a.appendChild(body);
-    return a;
+    return renderRecipeCard(recipe, (isFav) => {
+      if (state.favoritesOnly && !isFav) render();
+    });
   }
 })();
