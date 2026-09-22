@@ -27,7 +27,16 @@ jobs:
               const val = m ? m[1].trim() : '';
               return val === '_No response_' ? '' : val;
             }
-            core.setOutput('url', field('Recipe URL'));
+            // The issue-form field is the normal path, but mobile clients and
+            // hand-written issues don't always preserve the "### Recipe URL"
+            // heading -- fall back to the first URL anywhere in the title or
+            // body so a plain pasted link still works.
+            let url = field('Recipe URL');
+            if (!url) {
+              const urlMatch = (context.payload.issue.title + '\n' + body).match(/https?:\/\/\S+/);
+              url = urlMatch ? urlMatch[0].replace(/[)\].,;!?'"]+$/, '') : '';
+            }
+            core.setOutput('url', url);
             core.setOutput('category', field('Category \\(optional\\)'));
             core.setOutput('tags', field('Tags \\(optional, comma-separated\\)'));
 
