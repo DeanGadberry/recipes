@@ -4,6 +4,14 @@ on:
   issues:
     types: [opened, labeled]
 
+# Requests can arrive in a burst (several issues opened close together).
+# Each run commits straight to main, so without this, simultaneous runs
+# race to push and all but one lose with a non-fast-forward rejection.
+# This serializes them one at a time instead of running them concurrently.
+concurrency:
+  group: add-recipe-commit
+  cancel-in-progress: false
+
 permissions:
   contents: write
   issues: write
