@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Recipes</title>
+<meta name="description" content="A searchable family recipe box.">
+<link rel="stylesheet" href="assets/css/style.css">
+</head>
+<body>
+<header class="site-header">
+  <div class="container header-row">
+    <a class="brand" href="index.html">Recipes</a>
+    <nav>
+      <a href="request.html">Request a recipe</a>
+    </nav>
+  </div>
+</header>
+
+<main class="container">
+  <div class="toolbar">
+    <input id="search-input" type="search" placeholder="Search recipes, ingredients, tags..." aria-label="Search recipes">
+    <div class="toolbar-controls">
+      <select id="sort-select" aria-label="Sort recipes">
+        <option value="newest">Newest</option>
+        <option value="name">Name A-Z</option>
+        <option value="quickest">Quickest</option>
+        <option value="popular">Most cooked</option>
+        <option value="least-popular">Least cooked</option>
+      </select>
+      <div id="view-toggle" class="view-toggle" role="group" aria-label="Layout">
+        <button type="button" data-view="grid" class="active" aria-label="Grid view">&#9638;</button>
+        <button type="button" data-view="list" aria-label="List view">&#9776;</button>
+      </div>
+    </div>
+  </div>
+
+  <div id="category-bar" class="category-bar"></div>
+
+  <p id="result-count" class="result-count"></p>
+
+  <div id="recipe-grid" class="recipe-grid"></div>
+
+  <div id="empty-state" class="empty-state" hidden>
+    <h2>No recipes yet</h2>
+    <p>Nothing matches your search, or the box is still empty. <a href="request.html">Request a recipe</a> to get started.</p>
+  </div>
+</main>
+
+<footer class="site-footer">
+  <div class="container">
+    <p>A family recipe box &mdash; every recipe keeps only its ingredients, steps, and its source.</p>
+  </div>
+</footer>
+
+<script src="https://cdn.jsdelivr.net/npm/fuse.js@7.0.0/dist/fuse.min.js"></script>
+<script src="assets/js/data.js"></script>
+<script src="assets/js/views.js"></script>
+<script src="assets/js/app.js"></script>
+</body>
+</html>

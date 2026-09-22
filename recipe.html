@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Recipe</title>
+<link rel="stylesheet" href="assets/css/style.css">
+</head>
+<body>
+<header class="site-header no-print">
+  <div class="container header-row">
+    <a class="brand" href="index.html">Recipes</a>
+    <nav>
+      <a href="index.html">&larr; All recipes</a>
+    </nav>
+  </div>
+</header>
+
+<main class="container">
+  <div id="not-found" class="empty-state" hidden>
+    <h2>Recipe not found</h2>
+    <p><a href="index.html">Back to all recipes</a></p>
+  </div>
+
+  <article id="recipe-main" class="recipe">
+    <div id="recipe-image" class="recipe-image" hidden></div>
+
+    <h1 id="recipe-title"></h1>
+    <p id="recipe-meta" class="card-meta"></p>
+    <p id="view-count" class="view-count no-print"></p>
+
+    <div class="recipe-layout">
+      <section class="ingredients-panel">
+        <h2>Ingredients</h2>
+
+        <div class="scale-controls no-print">
+          <label for="servings-input">Servings</label>
+          <input id="servings-input" type="number" min="1" step="1">
+          <div id="scale-presets" class="chip-row"></div>
+        </div>
+        <p id="servings-label" class="servings-label"></p>
+
+        <ul id="ingredient-list" class="ingredient-list"></ul>
+      </section>
+
+      <section class="instructions-panel">
+        <h2>Instructions</h2>
+        <ol id="instruction-list" class="instruction-list"></ol>
+      </section>
+    </div>
+
+    <p id="recipe-source" class="recipe-source"></p>
+
+    <button id="print-btn" type="button" class="no-print print-btn">Print recipe</button>
+  </article>
+</main>
+
+<script src="assets/js/data.js"></script>
+<script src="assets/js/scale.js"></script>
+<script src="assets/js/views.js"></script>
+<script src="assets/js/recipe.js"></script>
+</body>
+</html>

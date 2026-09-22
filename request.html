@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Request a Recipe &mdash; Recipes</title>
+<link rel="stylesheet" href="assets/css/style.css">
+</head>
+<body>
+<header class="site-header">
+  <div class="container header-row">
+    <a class="brand" href="index.html">Recipes</a>
+    <nav>
+      <a href="index.html">&larr; All recipes</a>
+    </nav>
+  </div>
+</header>
+
+<main class="container narrow">
+  <h1>Request a recipe</h1>
+  <p>Found something worth adding? Send the link and it'll show up here once it's been added.</p>
+
+  <a class="button" id="github-request-link" href="#" target="_blank" rel="noopener">Open a recipe request</a>
+  <p class="hint">Opens a short form on GitHub &mdash; just paste the URL and submit. New requests get picked up automatically.</p>
+
+  <h2>Other ways to add one</h2>
+  <ul>
+    <li>Paste the recipe URL directly into a chat with Claude for this project and ask for it to be added.</li>
+    <li>Email a link to <a id="mailto-link" href="#"></a>.</li>
+  </ul>
+</main>
+
+<footer class="site-footer">
+  <div class="container">
+    <p>A family recipe box &mdash; every recipe keeps only its ingredients, steps, and its source.</p>
+  </div>
+</footer>
+
+<script>
+  const REPO = 'DeanGadberry/recipes';
+  const REQUEST_EMAIL = 'claude@deangadberry.com';
+  document.getElementById('github-request-link').href =
+    `https://github.com/${REPO}/issues/new?template=recipe-request.yml`;
+  const mailto = document.getElementById('mailto-link');
+  mailto.href = `mailto:${REQUEST_EMAIL}?subject=${encodeURIComponent('Recipe request')}&body=${encodeURIComponent('Recipe URL:\n')}`;
+  mailto.textContent = REQUEST_EMAIL;
+</script>
+</body>
+</html>
