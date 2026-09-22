@@ -12,5 +12,16 @@
     "image": null,
     "source_name": "Example recipe (edit or delete me)",
     "date_added": "2026-09-22"
+  },
+  {
+    "slug": "flourless-chocolate-cake",
+    "name": "Flourless Chocolate Cake",
+    "category": "Uncategorized",
+    "tags": [],
+    "servings_label": "16 servings",
+    "total_time_minutes": 45,
+    "image": "https://www.mamaknowsglutenfree.com/wp-content/uploads/2024/11/1-LOW-RES-Flourless-Chocolate-Cake-30.jpg",
+    "source_name": "mamaknowsglutenfree.com",
+    "date_added": "2026-09-22"
   }
 ]
