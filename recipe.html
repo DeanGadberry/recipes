@@ -4,6 +4,28 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Recipe &mdash; Gadberry Recipes</title>
+
+<!-- This page's content is filled in by JS per-recipe (see recipe.js), so a
+     link-preview crawler -- which doesn't run JS -- only ever sees this
+     generic title/image, not the specific recipe being shared. Making
+     previews recipe-specific would need server-side rendering, out of
+     scope for a static site. -->
+<link rel="icon" type="image/png" sizes="32x32" href="assets/img/favicon-32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="assets/img/favicon-16.png">
+<link rel="apple-touch-icon" href="assets/img/apple-touch-icon.png">
+
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Gadberry Recipes">
+<meta property="og:title" content="Gadberry Recipes">
+<meta property="og:description" content="A searchable family recipe box — every recipe keeps only its ingredients, steps, and its source.">
+<meta property="og:image" content="https://deangadberry.com/recipes/assets/img/og-image.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Gadberry Recipes">
+<meta name="twitter:description" content="A searchable family recipe box — every recipe keeps only its ingredients, steps, and its source.">
+<meta name="twitter:image" content="https://deangadberry.com/recipes/assets/img/og-image.png">
+
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700&family=Jost:wght@400;500;600&display=swap" rel="stylesheet">

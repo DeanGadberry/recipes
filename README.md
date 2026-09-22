@@ -121,6 +121,18 @@ dark mode (a deep warm olive, not near-black) -- see `:root` and
   `<svg class="icon"><use href="#icon-name"></use></svg>` instead of
   duplicating markup -- add a new `<symbol>` to that one file and it's
   available everywhere immediately.
+- **Logo / social preview**: `assets/img/og-image.png` (1200x630) is what
+  shows up as the link preview when a recipe.gadberry... link is shared in
+  iMessage, Slack, etc. (`og:image`/`twitter:image` in every page's
+  `<head>`); `favicon-16/32.png` and `apple-touch-icon.png` cover browser
+  tabs and "Add to Home Screen." All four were rasterized from hand-built
+  SVG (the same leaf mark used in `icons.svg`) via headless Chrome rather
+  than a design tool -- regenerate by editing the SVG source in a scratch
+  HTML file and re-screenshotting at the target size if the mark ever
+  changes. `recipe.html`'s preview is generic, not per-recipe: the page's
+  actual content is filled in by JS, which link-preview crawlers don't
+  run, so they only ever see this page's static `<head>`. Recipe-specific
+  previews would need server-side rendering.
 - **Category icons are automatic, not manual.** `CATEGORY_ICONS` in
   `icons.js` maps common category names (breakfast, dinner, dessert,
   slow cooker, ...) to an icon; anything not in that map quietly falls back
