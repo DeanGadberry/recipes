@@ -1,0 +1,117 @@
+{
+  "slug": "taco-pasta-one-pot",
+  "name": "Taco Pasta - (One Pot!)",
+  "category": "Main Course",
+  "tags": [
+    "30 minute meal",
+    "cheesy",
+    "ground beef",
+    "one pot",
+    "pasta shells",
+    "american"
+  ],
+  "servings": 6,
+  "servings_label": "6 servings",
+  "total_time_minutes": 30,
+  "image": "https://thecozycook.com/wp-content/uploads/2021/06/Taco-Pasta-Recipe-2.jpg",
+  "ingredients": [
+    {
+      "quantity": 1.0,
+      "unit": "cup",
+      "item": "Cheddar cheese (shredded)",
+      "raw": "1 cup Cheddar cheese (shredded)"
+    },
+    {
+      "quantity": 1.0,
+      "unit": "cup",
+      "item": "Monterey Jack Cheese (shredded)",
+      "raw": "1 cup Monterey Jack Cheese (shredded)"
+    },
+    {
+      "quantity": 4.0,
+      "unit": "oz",
+      "item": "Velveeta cheese (cut into cubes (equal to 1/3 cup)* can sub with \u00be cup shredded cheese)",
+      "raw": "4 oz. Velveeta cheese (cut into cubes (equal to 1/3 cup)* can sub with \u00be cup shredded cheese)"
+    },
+    {
+      "quantity": 1.0,
+      "unit": "lb",
+      "item": "Ground Beef (85% lean)",
+      "raw": "1 lb. Ground Beef (85% lean)"
+    },
+    {
+      "quantity": 1.0,
+      "unit": "tbsp",
+      "item": "Butter",
+      "raw": "1 Tablespoon Butter"
+    },
+    {
+      "quantity": 2.0,
+      "unit": "clove",
+      "item": "Garlic (minced)",
+      "raw": "2 cloves Garlic (minced)"
+    },
+    {
+      "quantity": 1.0,
+      "unit": "oz",
+      "item": "packet Taco Seasoning",
+      "raw": "1 oz. packet Taco Seasoning"
+    },
+    {
+      "quantity": 1.0,
+      "unit": "tbsp",
+      "item": "Worcestershire sauce",
+      "raw": "1 Tablespoon Worcestershire sauce"
+    },
+    {
+      "quantity": 2.0,
+      "unit": "tbsp",
+      "item": "Tomato paste",
+      "raw": "2 Tablespoons Tomato paste"
+    },
+    {
+      "quantity": 1.0,
+      "unit": "cup",
+      "item": "Beef broth",
+      "raw": "1 cup Beef broth"
+    },
+    {
+      "quantity": 1.0,
+      "unit": "cup",
+      "item": "Chicken broth",
+      "raw": "1 cup Chicken broth"
+    },
+    {
+      "quantity": 1.0,
+      "unit": "cup",
+      "item": "Whole milk (at room temp)",
+      "raw": "1 cup Whole milk (at room temp)"
+    },
+    {
+      "quantity": 1.0,
+      "unit": null,
+      "item": "(10 oz.) can Rotel Tomatoes with green chilies (undrained)",
+      "raw": "1 (10 oz.) can Rotel Tomatoes with green chilies (undrained)"
+    },
+    {
+      "quantity": 0.5,
+      "unit": "lb",
+      "item": "Medium pasta shells (see notes)",
+      "raw": "\u00bd lb. Medium pasta shells (see notes)"
+    }
+  ],
+  "instructions": [
+    "Shred the cheddar and Monterey Jack cheese from a block and set aside. It should be near room temperature when added to the pasta sauce.",
+    "Cook and crumble the ground beef over medium-high heat in a high-walled pot or dutch oven. Drain grease.",
+    "Melt the butter in the same pot and add and garlic. Cook for 1 minute.",
+    "Add all remaining ingredients except the cheese and pasta. Stir to combine.",
+    "Bring to a gentle boil. Add the pasta and submerge it in the liquid. Cover and cook according to package instructions. Slide a silicone spatula along the bottom of the pot halfway through to lift any ingredients that may be settling to the bottom.",
+    "Remove cover and ensure the pasta is sufficiently cooked. Taste-test a noodle for doneness before proceeding If needed, cover and cook longer, until your desired doneness is obtained.",
+    "Turn heat to low. Gradually stir in cheese until melted.",
+    "There will be plenty of sauce but it will thicken upon standing and the pasta will continue to absorb it.",
+    "Serve once desired consistency is obtained."
+  ],
+  "source_url": "https://thecozycook.com/taco-pasta/",
+  "source_name": "thecozycook.com",
+  "date_added": "2026-09-22"
+}

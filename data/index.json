@@ -67,5 +67,23 @@
     "image": "https://allthehealthythings.com/wp-content/uploads/2021/03/overnight-french-toast-casserole-4.jpg",
     "source_name": "allthehealthythings.com",
     "date_added": "2026-09-22"
+  },
+  {
+    "slug": "taco-pasta-one-pot",
+    "name": "Taco Pasta - (One Pot!)",
+    "category": "Main Course",
+    "tags": [
+      "30 minute meal",
+      "cheesy",
+      "ground beef",
+      "one pot",
+      "pasta shells",
+      "american"
+    ],
+    "servings_label": "6 servings",
+    "total_time_minutes": 30,
+    "image": "https://thecozycook.com/wp-content/uploads/2021/06/Taco-Pasta-Recipe-2.jpg",
+    "source_name": "thecozycook.com",
+    "date_added": "2026-09-22"
   }
 ]
