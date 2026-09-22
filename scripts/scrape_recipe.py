@@ -51,6 +51,49 @@ def clean_instructions(raw_instructions):
     return cleaned
 
 
+def _first_value(csv_value):
+    """schema.org recipeCategory/recipeCuisine can be a comma-joined string
+    of several values; take the first as the primary one."""
+    if not csv_value:
+        return None
+    parts = [p.strip() for p in csv_value.split(",") if p.strip()]
+    return parts[0] if parts else None
+
+
+def _discover_category_and_tags(scraper, recipe_name):
+    """Pull category/tags from the page's own schema.org Recipe data
+    (recipeCategory, recipeCuisine, keywords) instead of requiring a human
+    to type them in. Works for both dedicated and generic/wild-mode
+    scrapers -- recipe-scrapers fills these from schema.org whenever a
+    site-specific scraper doesn't implement them itself."""
+    try:
+        category = _first_value(scraper.category())
+    except Exception:
+        category = None
+
+    try:
+        cuisine = _first_value(scraper.cuisine())
+    except Exception:
+        cuisine = None
+
+    try:
+        keywords = scraper.keywords() or []
+    except Exception:
+        keywords = []
+
+    tags = []
+    seen = set()
+    for tag in [*keywords, cuisine]:
+        if not tag:
+            continue
+        tag = tag.strip().lower()
+        if tag and tag != recipe_name.strip().lower() and tag not in seen:
+            seen.add(tag)
+            tags.append(tag)
+
+    return category, tags
+
+
 def scrape(url, category=None, tags=None):
     html = urlopen(Request(url, headers=HEADERS)).read().decode("utf-8")
     # supported_only=False: use recipe-scrapers' purpose-built parser for
@@ -88,6 +131,8 @@ def scrape(url, category=None, tags=None):
     except Exception:
         host = re.sub(r"^https?://(www\.)?", "", url).split("/")[0]
 
+    discovered_category, discovered_tags = _discover_category_and_tags(scraper, name)
+
     ingredients = [parse_ingredient(line) for line in scraper.ingredients()]
     instructions = clean_instructions(scraper.instructions())
 
@@ -97,8 +142,8 @@ def scrape(url, category=None, tags=None):
     recipe = {
         "slug": slug,
         "name": name,
-        "category": category or "Uncategorized",
-        "tags": tags or [],
+        "category": category or discovered_category or "Uncategorized",
+        "tags": tags or discovered_tags,
         "servings": servings_number,
         "servings_label": servings_raw,
         "total_time_minutes": total_time or None,
