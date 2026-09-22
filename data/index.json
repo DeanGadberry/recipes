@@ -28,6 +28,21 @@
     "date_added": "2026-09-22"
   },
   {
+    "slug": "crock-pot-pinto-beans",
+    "name": "Crock Pot Pinto Beans",
+    "category": "Side Dish",
+    "tags": [
+      "crock pot side dish",
+      "healthy crock pot recipe",
+      "american"
+    ],
+    "servings_label": "6 cups",
+    "total_time_minutes": 490,
+    "image": "https://www.wellplated.com/wp-content/uploads/2018/08/Slow-Cooker-Pinto-Beans.jpg",
+    "source_name": "wellplated.com",
+    "date_added": "2026-09-22"
+  },
+  {
     "slug": "flourless-chocolate-cake",
     "name": "Flourless Chocolate Cake",
     "category": "Dessert",
