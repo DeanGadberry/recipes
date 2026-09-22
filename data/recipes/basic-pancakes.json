@@ -1,0 +1,68 @@
+{
+  "slug": "basic-pancakes",
+  "name": "Basic Pancakes",
+  "category": "Breakfast",
+  "tags": [
+    "vegetarian",
+    "quick"
+  ],
+  "servings": 4,
+  "servings_label": "4 servings (about 12 pancakes)",
+  "total_time_minutes": 20,
+  "image": null,
+  "ingredients": [
+    {
+      "quantity": 1.5,
+      "unit": "cup",
+      "item": "all-purpose flour",
+      "raw": "1 1/2 cups all-purpose flour"
+    },
+    {
+      "quantity": 3.5,
+      "unit": "tsp",
+      "item": "baking powder",
+      "raw": "3 1/2 tsp baking powder"
+    },
+    {
+      "quantity": 1.0,
+      "unit": "tsp",
+      "item": "salt",
+      "raw": "1 tsp salt"
+    },
+    {
+      "quantity": 1.0,
+      "unit": "tbsp",
+      "item": "sugar",
+      "raw": "1 tbsp sugar"
+    },
+    {
+      "quantity": 1.25,
+      "unit": "cup",
+      "item": "milk",
+      "raw": "1 1/4 cups milk"
+    },
+    {
+      "quantity": 1.0,
+      "unit": "large",
+      "item": "egg",
+      "raw": "1 large egg"
+    },
+    {
+      "quantity": 3.0,
+      "unit": "tbsp",
+      "item": "melted butter",
+      "raw": "3 tbsp melted butter"
+    }
+  ],
+  "instructions": [
+    "Whisk the flour, baking powder, salt, and sugar together in a large bowl.",
+    "In a separate bowl, whisk the milk, egg, and melted butter together.",
+    "Pour the wet ingredients into the dry ingredients and whisk just until combined; a few small lumps are fine.",
+    "Heat a lightly oiled griddle or skillet over medium heat.",
+    "Pour about 1/4 cup of batter per pancake onto the griddle.",
+    "Cook until bubbles form on top and the edges look set, about 2-3 minutes, then flip and cook until golden, another 1-2 minutes."
+  ],
+  "source_url": null,
+  "source_name": "Example recipe (edit or delete me)",
+  "date_added": "2026-09-22"
+}

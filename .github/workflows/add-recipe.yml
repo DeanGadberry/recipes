@@ -1,0 +1,103 @@
+name: Add recipe from request
+
+on:
+  issues:
+    types: [opened, labeled]
+
+permissions:
+  contents: write
+  issues: write
+
+jobs:
+  add-recipe:
+    if: contains(github.event.issue.labels.*.name, 'recipe-request')
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Parse issue form
+        id: parse
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const body = context.payload.issue.body || '';
+            function field(label) {
+              const re = new RegExp('### ' + label + '\\s*\\r?\\n\\r?\\n([^\\r\\n]*)', 'i');
+              const m = body.match(re);
+              const val = m ? m[1].trim() : '';
+              return val === '_No response_' ? '' : val;
+            }
+            core.setOutput('url', field('Recipe URL'));
+            core.setOutput('category', field('Category \\(optional\\)'));
+            core.setOutput('tags', field('Tags \\(optional, comma-separated\\)'));
+
+      - name: Require a URL
+        if: steps.parse.outputs.url == ''
+        run: |
+          echo "::error::No recipe URL found in the issue body."
+          exit 1
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - name: Install scraper
+        run: pip install -r scripts/requirements.txt
+
+      - name: Scrape recipe
+        id: scrape
+        continue-on-error: true
+        env:
+          RECIPE_URL: ${{ steps.parse.outputs.url }}
+          RECIPE_CATEGORY: ${{ steps.parse.outputs.category }}
+          RECIPE_TAGS: ${{ steps.parse.outputs.tags }}
+        run: |
+          ARGS=("$RECIPE_URL")
+          if [ -n "$RECIPE_CATEGORY" ]; then ARGS+=(--category "$RECIPE_CATEGORY"); fi
+          if [ -n "$RECIPE_TAGS" ]; then ARGS+=(--tags "$RECIPE_TAGS"); fi
+          python scripts/scrape_recipe.py "${ARGS[@]}"
+
+      - name: Commit and push
+        if: steps.scrape.outcome == 'success'
+        run: |
+          git config user.name "recipe-bot"
+          git config user.email "actions@users.noreply.github.com"
+          git add data/
+          git commit -m "Add recipe from #${{ github.event.issue.number }}"
+          git push
+
+      - name: Comment and close on success
+        if: steps.scrape.outcome == 'success'
+        uses: actions/github-script@v7
+        with:
+          script: |
+            await github.rest.issues.createComment({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              issue_number: context.issue.number,
+              body: "Added! It'll show up on the site shortly.",
+            });
+            await github.rest.issues.update({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              issue_number: context.issue.number,
+              state: 'closed',
+            });
+
+      - name: Comment on failure
+        if: steps.scrape.outcome != 'success'
+        uses: actions/github-script@v7
+        with:
+          script: |
+            await github.rest.issues.createComment({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              issue_number: context.issue.number,
+              body: "Couldn't automatically read that recipe (the site may not be supported yet). It'll need to be added by hand -- sorry! Trying a different source URL for the same recipe sometimes works.",
+            });
+            await github.rest.issues.addLabels({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              issue_number: context.issue.number,
+              labels: ['needs-manual-entry'],
+            });

@@ -1,0 +1,16 @@
+[
+  {
+    "slug": "basic-pancakes",
+    "name": "Basic Pancakes",
+    "category": "Breakfast",
+    "tags": [
+      "vegetarian",
+      "quick"
+    ],
+    "servings_label": "4 servings (about 12 pancakes)",
+    "total_time_minutes": 20,
+    "image": null,
+    "source_name": "Example recipe (edit or delete me)",
+    "date_added": "2026-09-22"
+  }
+]

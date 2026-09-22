@@ -1,0 +1,35 @@
+name: Recipe request
+description: Ask for a recipe to be added to the site
+title: "[Recipe] "
+labels: ["recipe-request"]
+body:
+  - type: input
+    id: url
+    attributes:
+      label: Recipe URL
+      description: Link to the recipe page you want added.
+      placeholder: "https://example.com/recipe/..."
+    validations:
+      required: true
+  - type: input
+    id: category
+    attributes:
+      label: Category (optional)
+      description: e.g. Breakfast, Dinner, Dessert, Slow Cooker
+      placeholder: "Dinner"
+    validations:
+      required: false
+  - type: input
+    id: tags
+    attributes:
+      label: Tags (optional, comma-separated)
+      placeholder: "vegetarian, quick, freezer-friendly"
+    validations:
+      required: false
+  - type: textarea
+    id: notes
+    attributes:
+      label: Notes (optional)
+      description: Anything worth knowing (e.g. "double the garlic").
+    validations:
+      required: false
