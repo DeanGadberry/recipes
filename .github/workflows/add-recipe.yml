@@ -93,9 +93,28 @@ jobs:
         run: |
           git config user.name "recipe-bot"
           git config user.email "actions@users.noreply.github.com"
-          git add data/
-          git commit -m "Add recipe from #${{ github.event.issue.number }}"
-          git push
+          # The concurrency group above makes a same-time race unlikely but
+          # not impossible (GitHub's queueing isn't perfectly atomic under a
+          # burst of triggers) -- self-heal instead of failing the whole run.
+          # The scraped recipe file already sits in the working tree; a
+          # mixed reset only rewinds HEAD/index, so it's untouched by this.
+          for i in 1 2 3 4 5; do
+            python scripts/build_index.py
+            git add data/
+            git commit -m "Add recipe from #${{ github.event.issue.number }}"
+            if git push origin HEAD:main; then
+              break
+            fi
+            if [ "$i" = "5" ]; then
+              echo "::error::Gave up pushing after 5 attempts."
+              exit 1
+            fi
+            echo "Push rejected (attempt $i), catching up to latest main and retrying..."
+            git reset --soft HEAD~1
+            git fetch origin main
+            git reset --mixed origin/main
+            sleep $(( (RANDOM % 4) + 1 ))
+          done
 
       - name: Comment and close on success
         if: steps.scrape.outcome == 'success'
