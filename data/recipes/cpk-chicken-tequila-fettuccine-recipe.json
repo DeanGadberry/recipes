@@ -1,0 +1,138 @@
+{
+  "slug": "cpk-chicken-tequila-fettuccine-recipe",
+  "name": "CPK Chicken Tequila Fettuccine Recipe",
+  "category": "Dinner",
+  "tags": [
+    "chicken tequila fettuccine (copycat)",
+    "american fusion"
+  ],
+  "servings": 6,
+  "servings_label": "6 servings",
+  "total_time_minutes": 35,
+  "image": "https://dinnerthendessert.com/wp-content/uploads/2017/08/Chicken-Tequila-Fettuccine-Enhanced-1.png",
+  "ingredients": [
+    {
+      "quantity": 2.0,
+      "unit": "tbsp",
+      "item": "garlic (, minced)",
+      "raw": "2 tablespoons garlic (, minced)"
+    },
+    {
+      "quantity": 2.0,
+      "unit": "tbsp",
+      "item": "jalape\u00f1os (, minced)",
+      "raw": "2 tablespoons jalape\u00f1os (, minced)"
+    },
+    {
+      "quantity": 3.0,
+      "unit": "tbsp",
+      "item": "unsalted butter",
+      "raw": "3 tablespoons unsalted butter"
+    },
+    {
+      "quantity": 0.75,
+      "unit": "cup",
+      "item": "chicken stock",
+      "raw": "3/4 cup chicken stock"
+    },
+    {
+      "quantity": 2.0,
+      "unit": "tbsp",
+      "item": "tequila",
+      "raw": "2 tablespoons tequila"
+    },
+    {
+      "quantity": 2.0,
+      "unit": "tbsp",
+      "item": "lime juice",
+      "raw": "2 tablespoons lime juice"
+    },
+    {
+      "quantity": 1.5,
+      "unit": "cup",
+      "item": "heavy cream",
+      "raw": "1 1/2 cups heavy cream"
+    },
+    {
+      "quantity": 3.0,
+      "unit": "tbsp",
+      "item": "soy sauce",
+      "raw": "3 tablespoons soy sauce"
+    },
+    {
+      "quantity": 2.0,
+      "unit": "tbsp",
+      "item": "vegetable oil",
+      "raw": "2 tablespoon vegetable oil"
+    },
+    {
+      "quantity": 2.0,
+      "unit": null,
+      "item": "chicken breasts (, boneless and skinless)",
+      "raw": "2 chicken breasts (, boneless and skinless)"
+    },
+    {
+      "quantity": 0.25,
+      "unit": "tsp",
+      "item": "kosher salt",
+      "raw": "1/4 teaspoon kosher salt"
+    },
+    {
+      "quantity": 0.25,
+      "unit": "tsp",
+      "item": "coarse ground black pepper",
+      "raw": "1/4 teaspoon coarse ground black pepper"
+    },
+    {
+      "quantity": 0.5,
+      "unit": null,
+      "item": "red onion (, sliced thinly)",
+      "raw": "1/2 red onion (, sliced thinly)"
+    },
+    {
+      "quantity": 0.5,
+      "unit": null,
+      "item": "red bell pepper (, sliced thinly)",
+      "raw": "1/2 red bell pepper (, sliced thinly)"
+    },
+    {
+      "quantity": 0.5,
+      "unit": null,
+      "item": "yellow bell pepper (, sliced thinly)",
+      "raw": "1/2 yellow bell pepper (, sliced thinly)"
+    },
+    {
+      "quantity": 0.5,
+      "unit": null,
+      "item": "green bell pepper (, sliced thinly)",
+      "raw": "1/2 green bell pepper (, sliced thinly)"
+    },
+    {
+      "quantity": 0.5,
+      "unit": "cup",
+      "item": "cilantro (, chopped)",
+      "raw": "1/2 cup cilantro (, chopped)"
+    },
+    {
+      "quantity": 1.0,
+      "unit": "lb",
+      "item": "spinach fettucini (, cooked and drained, not rinsed)",
+      "raw": "1 pound spinach fettucini (, cooked and drained, not rinsed)"
+    }
+  ],
+  "instructions": [
+    "Cook",
+    "Add the garlic and jalapeno in a small saucepan with the butter and cook over medium low heat for 1-2 minutes",
+    "Reduce",
+    "Add the chicken stock, tequila, lime juice, and cook until it has reduced to the consistency of a glaze, then turn off the heat and whisk in the cream and soy sauce.",
+    "Cook",
+    "Add the vegetable oil to the pan, season the chicken with salt and pepper, and cook on medium high heat, 3-4 minutes on each side or until cooked through.",
+    "Remove the chicken and add in the bell peppers and onions, then cook for 2-3 minutes until just slightly crisp.",
+    "Chop the chicken into cubes and add it back into the pan with the bell peppers and pasta.",
+    "Add in the heavy cream mixture and cilantro.",
+    "Toss together and cook 1-2 minutes until thickened."
+  ],
+  "source_url": "https://dinnerthendessert.com/chicken-tequila-fettuccine/",
+  "source_name": "dinnerthendessert.com",
+  "date_added": "2026-09-22"
+}
